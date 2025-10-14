@@ -33,6 +33,7 @@ out/
 /nbdist/
 /.nb-gradle/
 
+/.metadata/
 /gradle/
 ### VS Code ###
 .vscode/
