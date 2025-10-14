@@ -9,7 +9,7 @@ public class Ex5Service {
 	Logger log = LoggerFactory.getLogger(Ex3Service.class);
 	
 	public String ex521() {
-		System.out.println("sayHello");
+		System.out.println("ex521");
 		return "ex521";
 	}
 }
