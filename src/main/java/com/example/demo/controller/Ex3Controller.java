@@ -5,19 +5,16 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.ExCh03Application;
 import com.example.demo.service.Ex3Service;
-
 
 @RestController
 public class Ex3Controller {
 
-    private final ExCh03Application exCh03Application;
-
-	Ex3Service exService;
+    Ex3Service exService;
 	public Ex3Controller(Ex3Service exService, ExCh03Application exCh03Application) {
 		this.exService = exService;
-		this.exCh03Application = exCh03Application;
 	}
 	
 	@GetMapping("/")
