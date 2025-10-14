@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ public class Ex3Service {
 		log.info("안녕 좋은날");
 		log.error("안녕 좋은날");
 		log.debug("안녕 좋은날");
+		
 		return "sayHello 안녕";
 	}
 	
@@ -33,6 +35,7 @@ public class Ex3Service {
         } else {
         	msg += "else 블록입니다.";
         }
+        
         return msg;
 	}
 
@@ -47,7 +50,6 @@ public class Ex3Service {
             //msg += "i = " + array[i]+", ";
         }
 		return msg;
-        
 	}
 
 	public String ex323() {
@@ -66,8 +68,6 @@ public class Ex3Service {
 		log.info(msg);
 		return msg;
 	}
-
-	
 	
 	public interface Car {
 		public String getColor();
@@ -81,9 +81,9 @@ public class Ex3Service {
 		@Override
 		public String getColor() {
 			return "색상 : RED 소나타 ";
-					
 		}
 	}
+	
 	public class K5 implements Car {
 		public K5() {
 			log.info("K5 생성자 출고");
@@ -92,10 +92,8 @@ public class Ex3Service {
 		@Override
 		public String getColor() {
 			return "색상 : BLUE K5 ";
-					
 		}
 	}
-	
 	
 	public String ex324() {
 		Car car1 = new Sonata();
@@ -103,6 +101,7 @@ public class Ex3Service {
         Car car2 = new K5();
         String re2 = car2.getColor();
         String result = re1+"출고 <br>"+ re2+"출고 <br>"+"두 대의 차를 출고 하였음.";
+        
         return result;
 	}
 
@@ -114,7 +113,6 @@ public class Ex3Service {
         list.add(3);
 
         log.info(list.get(number).toString());
-        
         return list.get(number).toString();
 	}
 
@@ -133,7 +131,6 @@ public class Ex3Service {
         int voidIndex = list.indexOf("void");
         
         log.info("리스트 내용: {}", list);
-        
 		return "void의 index = " + voidIndex;
 	}
 
@@ -168,11 +165,9 @@ public class Ex3Service {
 		});
         
         log.info(list.toString());
-        
         list.sort((Comparator<String>) (str1 ,str2) -> str1.compareTo(str2));
         
         log.info(list.toString());
-        
 		return list;
 	}
 
@@ -237,32 +232,81 @@ public class Ex3Service {
 		StringBuilder msg = new StringBuilder();
 		
 		list.stream().forEach(value -> msg.append(value+"<br>"));
-		
 		return msg;
 	}
 
+	public String ex337() {
+		Integer[] integerArray = new Integer[]{1, 1, 1, 1, 2, 2, 2, 3, 3, 4};
+		List<Integer> list = Arrays.asList(integerArray);
+		List<Integer> distinctList = list.stream().distinct().toList();
+		
+		log.info(distinctList.toString());
+		return distinctList.toString();
+	}
+	
+	public String ex338() {
+		String[] lowercaseArray = new String[]{"public", "static", "void"};
+		List<String> lowercaseList = Arrays.asList(lowercaseArray);
+        List<String> uppercaseList = lowercaseList.stream()
+                .map(value -> value.toUpperCase()).toList();
+		
+		log.info(uppercaseList.toString());
+		return uppercaseList.toString();
+	}
+	
+	public String ex3310() {
+		String isThisNull = getSomeString3310();
+		if(null != isThisNull) {
+            System.out.println(isThisNull.toUpperCase());
+        }
+		return "이 예제는 문자열이 null이라서 대문자로 변환할 수 없습니다. java.lang.NullPointerException 을 냅니다.";
+	}
+	private String getSomeString3310() {
+        return null; // 이 메서드는 항상 null을 반환한다.
+    }
 
+	public String ex3311() {
+		Optional<String> isThisNull = getSomeString3311();
+		isThisNull.ifPresent(str -> System.out.println(str.toUpperCase()));
+		return "이 라인이 Optional 사용의 핵심이자 NullPointerException을 방지하는 지점입니다.<br>"
+				+ "ifPresent() 메서드는 Optional 객체 내부에 실제로 값이 존재할 경우에만 괄호 안에 있는 람다 표현식 <br> "
+				+ "(여기서는 str -> System.out.println(str.toUpperCase()))을 실행합니다.<br>"
+				+ "현재 isThisNull은 Optional.empty() 상태, 즉 내부에 값이 없습니다. <br>"
+				+ "따라서 ifPresent() 메서드는 이 람다식을 실행하지 않습니다.<br>"
+				+ "결과적으로 str.toUpperCase()라는 코드는 전혀 호출될 기회조차 없어집니다.";
+	}
+	private Optional<String> getSomeString3311(){
+		return Optional.empty();
+	}	
 	
+	public StringBuilder ex3312() {
+		Optional<String> isThisNull = getSomeString3312();
+		isThisNull.ifPresent(string -> log.info(string.toUpperCase()));
+		StringBuilder msg = new StringBuilder();
+		isThisNull.ifPresent(string -> msg.append(string.toUpperCase()));
+		return msg;
+	}
+	private Optional<String> getSomeString3312(){
+		return Optional.ofNullable("public static void");
+	}
 	
+	public StringBuilder ex3313() {
+		StringBuilder msg = new StringBuilder();
+		Optional<String> str = getSomeString3312();
+		if(str.isPresent()) {
+			log.info(str.get().toUpperCase());
+			msg.append(str.get().toUpperCase());
+		}
+		return msg;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public StringBuilder ex3314() {
+		StringBuilder msg = new StringBuilder();
+		Optional<String> str = getSomeString3312();
+		str.ifPresent((string)-> log.info(string.toUpperCase()));
+		str.ifPresent((string)-> msg.append(string.toUpperCase()));
+		return msg;
+	}
 	
 	
 }
