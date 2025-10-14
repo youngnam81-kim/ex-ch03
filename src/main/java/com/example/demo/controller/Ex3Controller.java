@@ -1,18 +1,23 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.service.ExService;
+import com.example.demo.ExCh03Application;
+import com.example.demo.service.Ex3Service;
 
 
 @RestController
-public class ExController {
+public class Ex3Controller {
 
-	ExService exService;
-	public ExController(ExService exService) {
+    private final ExCh03Application exCh03Application;
+
+	Ex3Service exService;
+	public Ex3Controller(Ex3Service exService, ExCh03Application exCh03Application) {
 		this.exService = exService;
+		this.exCh03Application = exCh03Application;
 	}
 	
 	@GetMapping("/")
@@ -68,5 +73,35 @@ public class ExController {
 		// http://localhost:8080/ex327
 		return exService.ex327();
 	}
+	
+	@GetMapping("/ex331")
+	public List<?> ex331() {
+		return exService.ex331();
+	}
+	
+	@GetMapping("/ex332")
+	public StringBuilder ex332() {
+		return exService.ex332();
+	}
+	
+	@GetMapping("/ex333")
+	public String ex333() {
+		return exService.ex333();
+	}
+	
+	@GetMapping("/ex334")
+	public StringBuilder ex334() {
+		return exService.ex334();
+	}
+	
+	@GetMapping("/ex335")
+	public StringBuilder ex335() {
+		return exService.ex335();
+	}
+	
+	
+	
+	
+	
 	
 }

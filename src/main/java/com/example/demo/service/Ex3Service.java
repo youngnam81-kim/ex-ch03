@@ -1,16 +1,20 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ExService {
 
-	Logger log = LoggerFactory.getLogger(ExService.class);
+@Service
+public class Ex3Service {
+
+	Logger log = LoggerFactory.getLogger(Ex3Service.class);
 	
 	public String sayHello() {
 		System.out.println("sayHello");
@@ -143,10 +147,104 @@ public class ExService {
 	    System.out.println(str1.equals(str2)); // true or false?
 	    
 	    msg = "str1 == str2 : "+ (str1 == str2) +"<br>";
-	    msg += "str1.equals(str2) : " + (str1.equals(str2));
+	    msg += "str1.equals(str2) : " + (str1.equals(str2))+"<br>";
+	    msg += "ex327+ex328 참조형일경우 equals로 비교.";
 	    
 		return msg;
 	}
+
+	public List<?> ex331() {
+		List<String> list = new ArrayList<>();
+		
+		list.add("static");
+		list.add("void");
+		list.add("public");
+        
+        list.sort(new Comparator<String>() {
+        	@Override
+        	public int compare(String str1, String str2) {
+        		return str1.compareTo(str2);
+        	}
+		});
+        
+        log.info(list.toString());
+        
+        list.sort((Comparator<String>) (str1 ,str2) -> str1.compareTo(str2));
+        
+        log.info(list.toString());
+        
+		return list;
+	}
+
+	public StringBuilder ex332() {
+		List<String> list = new ArrayList<>();
+		
+		list.add("static");
+		list.add("public");
+        list.add("void");
+
+        StringBuilder msg = new StringBuilder();
+        
+        list.stream().forEach(
+        		str-> msg.append(str+"<br>") 
+        		);
+        
+		return msg.append("StringBuilder 사용해봅니다.");
+	}
+
+	public String ex333() {
+		Integer[] integerArray = new Integer[] {1,2,3,4,5,6,7,8,9,10};
+		List<Integer> list = Arrays.asList(integerArray);
+		List<Integer> evenList = new ArrayList<Integer>();
+		String msg="";
+		
+		for (int i=0; i<list.size();i++) {
+			int number = list.get(i);
+			if(number%2==0) {
+				evenList.add(number);
+			}
+		}
+
+		for (int i = 0; i < evenList.size(); i++) {
+            log.info(evenList.get(i).toString());
+        }
+		
+		log.info(evenList.toString());
+		msg += evenList.toString();
+		
+		return msg;
+	}
+	
+
+	public StringBuilder ex334() {
+		Integer[] integerArray = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+		List<Integer> list = Arrays.asList(integerArray);
+		
+		List<Integer> evenList = list.stream()
+				.filter(value -> value%2==0).collect(Collectors.toList());
+		
+		StringBuilder msg = new StringBuilder();
+		
+		evenList.stream().forEach(value -> msg.append(value).append("<br>"));
+		
+		log.info(msg.toString());
+		return msg;
+	}
+	
+	public StringBuilder ex335() {
+		Integer[] integerArray = new Integer[] {1,2,3,4,5};
+		List<Integer> list = Arrays.asList(integerArray);
+		StringBuilder msg = new StringBuilder();
+		
+		list.stream().forEach(value -> msg.append(value+"<br>"));
+		
+		return msg;
+	}
+
+
+	
+	
+	
 	
 	
 	
