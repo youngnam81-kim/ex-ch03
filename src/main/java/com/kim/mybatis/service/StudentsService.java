@@ -5,19 +5,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kim.mybatis.domain.Student;
-import com.kim.mybatis.mapper.StudentMapper;
+import com.kim.mybatis.domain.Students;
+import com.kim.mybatis.mapper.StudentsMapper;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class StudentService {
+public class StudentsService {
 
-	private final StudentMapper studentMapper;
+	private final StudentsMapper studentMapper;
 
-	public List<Student> getAllStudents() {
+	public List<Students> getAllStudents() {
 
 		return studentMapper.findAll();
 //		List<Student> studens = new ArrayList<>();
@@ -27,18 +27,18 @@ public class StudentService {
 //		return studens;
 	}
 
-	public Student getStudent(Long id) {
+	public Students getStudent(Long id) {
 		return studentMapper.findById(id);
 	}
 
 	@Transactional
-	public void createStudent(Student student) {
+	public void createStudent(Students student) {
 		studentMapper.insert(student);
 
 	}
 
 	@Transactional
-	public void updateStudent(Student student) {
+	public void updateStudent(Students student) {
 		studentMapper.update(student);
 	}
 

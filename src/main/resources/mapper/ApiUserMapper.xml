@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kim.mybatis_thymeleaf.mapper.ApiUserMapper">
+
+    <select id="selectAllApiUsers" resultType="ApiUser">
+        SELECT id, user_id, user_name FROM api_user
+    </select>
+    
+    <select id="selectfindByIdApiUser" parameterType="Long" resultType="ApiUser">
+		SELECT id, user_id, user_name FROM api_user WHERE id = #{id}
+    </select>
+    
+    <insert id="insertApiUser" parameterType="ApiUser">
+        INSERT INTO api_user (id, user_id, user_name)
+        VALUES (#{id}, #{user_id}, #{user_name})
+    </insert>
+    
+    <update id="updateApiUser" parameterType="ApiUser">
+        UPDATE api_user
+        SET id = #{id}, user_id = #{user_id}, user_name = #{user_name}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="Long">
+        DELETE FROM api_user WHERE id = #{id}
+    </delete>
+    
+</mapper>

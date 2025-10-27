@@ -31,11 +31,19 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	// oracle dependencies
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc17'
+	implementation 'com.oracle.database.jdbc:ojdbc17'
+	implementation 'com.oracle.database.security:oraclepki'
+	implementation 'com.oracle.database.security:osdt_cert:19.8.0.0'
+    implementation 'com.oracle.database.security:osdt_core:19.8.0.0'
+	implementation 'com.oracle.database.jdbc:ucp'
+	implementation 'com.oracle.database.xml:xdb'
 }
 
 tasks.named('test') {

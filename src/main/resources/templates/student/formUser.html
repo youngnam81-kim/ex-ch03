@@ -74,7 +74,7 @@
 	<div class="form-container">
 		<h1 th:text="${student.id != null ? '학생 수정' : '학생 등록'}">학생 등록</h1>
 
-		<form th:action="${student.id != null ? '/student/' + student.id : '/student'}" th:object="${student}"
+		<form th:action="${student.id != null ? '/students/' + student.id : '/students'}" th:object="${student}"
 			method="post">
 
 			<div class="form-group">
@@ -94,7 +94,7 @@
 
 			<div class="button-group">
 				<button type="submit" class="btn btn-primary">저장</button>
-				<a href="/student" class="btn btn-secondary">취1소</a>
+				<a href="/student" class="btn btn-secondary">취소</a>
 			</div>
 		</form>
 	</div>

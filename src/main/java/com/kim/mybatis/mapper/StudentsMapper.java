@@ -4,24 +4,24 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.kim.mybatis.domain.Student;
+import com.kim.mybatis.domain.Students;
 
 @Mapper
-public interface StudentMapper {
+public interface StudentsMapper {
 
-	List<Student> findAll();
+	List<Students> findAll();
 
-	Student findById(Long id);
+	Students findById(Long id);
 //	@Select("SELECT * FROM student WHERE id = #{id}")
 //	Student findById(Long id);
 
-	void insert(Student student);
+	void insert(Students student);
 //	@Insert("INSERT INTO student(NAME, email, age) \r\n"
 //			+ "  	VALUES (#{name}, #{email}, #{age})")
 //	@Options(useGeneratedKeys = true, keyProperty = "id")
 //	void insert(Student student);
 
-	void update(Student student);
+	void update(Students student);
 //	@Update("UPDATE student\r\n"
 //			+ "	SET NAME = #{name}, email = #{email}, age = #{age}\r\n"
 //			+ "	WHERE id = #{id}")

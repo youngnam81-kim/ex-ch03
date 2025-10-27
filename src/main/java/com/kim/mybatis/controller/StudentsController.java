@@ -8,36 +8,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kim.mybatis.domain.Student;
-import com.kim.mybatis.service.StudentService;
+import com.kim.mybatis.domain.Students;
+import com.kim.mybatis.service.StudentsService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/students")
 @RequiredArgsConstructor
-public class StudentController {
+public class StudentsController {
 
-	private final StudentService studentService;
+	private final StudentsService studentService;
 
 	// 전체 리스트 화면
 	@GetMapping
 	public String list(Model model) {
 		model.addAttribute("students", studentService.getAllStudents());
-		return "student/list";
+		return "student/lists";
 	}
 		
 	//등록 form
 	@GetMapping("/new")
 	public String createForm(Model model) {
 
-		model.addAttribute("student", new Student());
-		return "student/form";
+		model.addAttribute("student", new Students());
+		return "student/forms";
 	}
 
 	//등록처리
 	@PostMapping
-	public String create(@ModelAttribute Student student) {
+	public String create(@ModelAttribute Students student) {
 		studentService.createStudent(student);
 		return "redirect:/students";
 	}
@@ -47,12 +47,12 @@ public class StudentController {
 	public String updateForm(@PathVariable Long id, Model model) {
 
 		model.addAttribute("student", studentService.getStudent(id));
-		return "student/form";
+		return "student/forms";
 	}
 	
 	//수정처리
 	@PostMapping("/{id}")
-	public String update(@PathVariable Long id, @ModelAttribute Student student) {
+	public String update(@PathVariable Long id, @ModelAttribute Students student) {
 
 		student.setId(id);
 		studentService.updateStudent(student);

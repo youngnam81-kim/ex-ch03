@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kim.mybatis.domain.Student;
-import com.kim.mybatis.service.StudentService;
+import com.kim.mybatis.domain.Students;
+import com.kim.mybatis.service.StudentsService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/api/students-mybatis")
 @RequiredArgsConstructor
-public class StudentRestController {
+public class StudentsRestController {
 
 //	Dependency injection : 방법1
 //	@Autowired
@@ -38,18 +38,18 @@ public class StudentRestController {
 //		private final StudentService studentService;
 //	}
 
-	private final StudentService studentService;
+	private final StudentsService studentService;
 
 //	전체 조회: GET http://localhost:8080/api/students
 	@GetMapping
-	public List<Student> list() {
+	public List<Students> list() {
 		return studentService.getAllStudents();
 	}
 
 //	단건 조회: GET http://localhost:8080/api/students/1
 	@GetMapping("/{id}")
-	public ResponseEntity<Student> detail(@PathVariable Long id) {
-		Student student = studentService.getStudent(id);
+	public ResponseEntity<Students> detail(@PathVariable Long id) {
+		Students student = studentService.getStudent(id);
 		return ResponseEntity.ok(student);
 	}
 
@@ -60,7 +60,7 @@ public class StudentRestController {
 //		"age":25
 //	}
 	@PostMapping
-	public ResponseEntity<Student> create(@RequestBody Student student) {
+	public ResponseEntity<Students> create(@RequestBody Students student) {
 
 		studentService.createStudent(student);
 		return ResponseEntity.ok(student);
@@ -68,7 +68,7 @@ public class StudentRestController {
 
 //	수정 put
 	@PutMapping("/{id}")
-	public ResponseEntity<Student> update(@PathVariable Long id, @RequestBody Student student) {
+	public ResponseEntity<Students> update(@PathVariable Long id, @RequestBody Students student) {
 
 		student.setId(id);
 		studentService.updateStudent(student);
